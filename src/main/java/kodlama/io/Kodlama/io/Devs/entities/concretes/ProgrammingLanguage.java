@@ -1,0 +1,22 @@
+package kodlama.io.Kodlama.io.Devs.entities.concretes;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProgrammingLanguage {
+
+    private int id;
+    private String language ;
+
+    @Override
+    public String toString() {
+        return "ProgrammingLanguage{" +
+                "id=" + id +
+                ", language='" + language + '\'' +
+                '}';
+    }
+}
