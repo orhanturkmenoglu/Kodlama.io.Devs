@@ -14,6 +14,8 @@ import java.util.List;
  parent ve child nesneleri belirtmemizi sağlar
  @JsonManagedReference : parent nesneyi işaret eder
  @JsonBackReference     : child nesneyi işaret eder
+
+ alternatif olarak dto design pattern da kullanılabilir.
  */
 @Entity
 @Table(name = "programmingLanguages")
@@ -28,7 +30,7 @@ public class ProgrammingLanguage {
     private Long id;
     private String language;
 
-    @JsonManagedReference
+   /* @JsonManagedReference*/
     @OneToMany (fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "programmingLanguage")
     private List<Tecnology> tecnologies ;
 }

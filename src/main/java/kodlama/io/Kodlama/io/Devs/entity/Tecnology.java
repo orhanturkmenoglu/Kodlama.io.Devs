@@ -22,7 +22,7 @@ public class Tecnology  {
     private Long tecnologyId;
     private String tecnologyName;
 
-    @JsonBackReference
+   /* @JsonBackReference*/
     @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private ProgrammingLanguage programmingLanguage;
 }
