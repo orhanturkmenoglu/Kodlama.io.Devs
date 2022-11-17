@@ -1,10 +1,6 @@
 package kodlama.io.Kodlama.io.Devs.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString (exclude = "technologies")
 public class ProgrammingLanguage  implements Serializable {
 
     @Id
@@ -31,7 +28,7 @@ public class ProgrammingLanguage  implements Serializable {
     private Long id;
     private String language;
 
-   @JsonManagedReference
+    /*@JsonManagedReference*/
     @OneToMany (fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "programmingLanguage")
-    private List<Tecnology> tecnologies ;
+    private List<Technology> technologies;
 }

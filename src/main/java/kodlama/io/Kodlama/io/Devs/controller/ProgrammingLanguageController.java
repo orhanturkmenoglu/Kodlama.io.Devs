@@ -1,4 +1,4 @@
-package kodlama.io.Kodlama.io.Devs.webApi;
+package kodlama.io.Kodlama.io.Devs.controller;
 
 import kodlama.io.Kodlama.io.Devs.business.ProgrammingLanguageService;
 import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequest;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/languages")
-public class ProgrammingLanguagesController {
+public class ProgrammingLanguageController {
 
     private ProgrammingLanguageService programmingService;
 
     @Autowired
-    public ProgrammingLanguagesController(ProgrammingLanguageService programmingService) {
+    public ProgrammingLanguageController(ProgrammingLanguageService programmingService) {
         this.programmingService = programmingService;
     }
 
@@ -41,13 +41,13 @@ public class ProgrammingLanguagesController {
     public ResponseEntity<CreateProgrammingLanguageRequest> save(ProgrammingLanguage programmingLanguage) throws Exception {
 
         CreateProgrammingLanguageRequest save = programmingService.save(programmingLanguage);
-        return new ResponseEntity<>(save, HttpStatus.OK);
+        return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<CreateProgrammingLanguageRequest> deleteById(@PathVariable("id") Long id) {
 
         CreateProgrammingLanguageRequest deleteById = programmingService.deleteById(id);
-        return new ResponseEntity<>(deleteById, HttpStatus.OK);
+        return new ResponseEntity<>(deleteById, HttpStatus.NO_CONTENT);
     }
 }

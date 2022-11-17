@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -31,7 +30,7 @@ public class ProgrammingLanguageService {
             GetAllProgrammingLanguageResponse response = new GetAllProgrammingLanguageResponse();
             response.setId(language.getId());
             response.setLanguage(language.getLanguage());
-            response.setTecnologies(language.getTecnologies());
+            response.setTecnologies(language.getTechnologies());
             responseItem.add(response);
         }
 
