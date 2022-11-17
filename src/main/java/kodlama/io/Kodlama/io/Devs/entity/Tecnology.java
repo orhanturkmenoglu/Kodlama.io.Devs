@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /*
-    Serializable özetle : nesnenin dış dünyada da karşılıgının olması (aynı bire bir veri tipleriyle).
+    Java Serialization API sayesinde bir nesnenin birebir kopyasını, Java platformu dışında da depolayabiliriz.
+     Bu mekanizma ile daha sonra, nesneyi depolanan yerden çekip, aynı durum (state) ve özellikleri ile
+     kullanmaya devam edebiliriz. Tüm bu sisteme, Object Serialization (Nesne Serileştirme) adı verilir.
  */
 @Entity
 @Table(name = "tecnologies")
@@ -24,7 +26,7 @@ public class Tecnology implements Serializable {
     private Long tecnologyId;
     private String tecnologyName;
 
-   /* @JsonBackReference*/
-    @ManyToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    /* @JsonBackReference*/
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProgrammingLanguage programmingLanguage;
 }
