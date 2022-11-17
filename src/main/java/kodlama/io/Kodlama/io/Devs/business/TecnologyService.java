@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TecnologyService {
@@ -37,7 +38,22 @@ public class TecnologyService {
         return responseItem;
     }
 
-    public CreateTecnologyRequest deleteById(long id) {
+    public GetAllTecnologyResponse findById(Long id) {
+
+        Optional<Tecnology> findById = repository.findById(id);
+
+        GetAllTecnologyResponse response = new GetAllTecnologyResponse();
+
+        if (findById.isPresent()) {
+            response.setTecnologyId(findById.get().getTecnologyId());
+            response.setTecnologyName(findById.get().getTecnologyName());
+        }
+
+        return response;
+
+    }
+
+    public CreateTecnologyRequest deleteById(Long id) {
 
         CreateTecnologyRequest request = new CreateTecnologyRequest();
         request.setTecnologyId(id);

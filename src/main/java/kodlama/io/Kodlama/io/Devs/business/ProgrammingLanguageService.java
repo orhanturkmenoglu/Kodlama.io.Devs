@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -37,16 +38,22 @@ public class ProgrammingLanguageService {
         return responseItem;
     }
 
-    public CreateProgrammingLanguageRequest save(ProgrammingLanguage programmingLanguage) {
+    public CreateProgrammingLanguageRequest save(ProgrammingLanguage programmingLanguage) throws Exception {
+
+        if (programmingLanguage.getLanguage().isEmpty() || programmingLanguage.getLanguage() == null) {
+            throw new Exception("Programlama dili boş veya null geçilemez !!");
+        }
+
+        if (programmingLanguage.equals(programmingLanguage)) {
+            throw new Exception("Programala dili tekrar edemez !!");
+        }
 
         ProgrammingLanguage save = repository.save(programmingLanguage);
 
         CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest();
-
         request.setLanguage(save.getLanguage());
 
         return request;
-
     }
 
     public GetAllProgrammingLanguageResponse findById(long id) {
@@ -61,12 +68,13 @@ public class ProgrammingLanguageService {
         return response;
     }
 
-    public CreateProgrammingLanguageRequest deleteById (long id) {
+    public CreateProgrammingLanguageRequest deleteById(Long id) {
 
-        CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest ();
+        CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest();
         request.setId(id);
         repository.deleteById(request.getId());
-        return  request;
+
+        return request;
     }
 
 }

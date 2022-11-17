@@ -5,12 +5,14 @@ import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequ
 import kodlama.io.Kodlama.io.Devs.business.response.GetAllProgrammingLanguageResponse;
 import kodlama.io.Kodlama.io.Devs.entity.ProgrammingLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/v1/languages")
+@RequestMapping("/api/v1/languages")
 public class ProgrammingLanguagesController {
 
     private ProgrammingLanguageService programmingService;
@@ -22,22 +24,30 @@ public class ProgrammingLanguagesController {
 
 
     @GetMapping("/findall")
-    public List<GetAllProgrammingLanguageResponse> findAll (){
-       return  programmingService.findAll();
+    public ResponseEntity<List<GetAllProgrammingLanguageResponse>> findAll() {
+
+        List<GetAllProgrammingLanguageResponse> findAll = programmingService.findAll();
+        return new ResponseEntity<>(findAll, HttpStatus.OK);
     }
 
-    @GetMapping ("/findById/{id}")
-    public GetAllProgrammingLanguageResponse findById (@PathVariable("id") long id) {
-        return programmingService.findById(id);
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<GetAllProgrammingLanguageResponse> findById(@PathVariable("id") long id) {
+
+        GetAllProgrammingLanguageResponse findById = programmingService.findById(id);
+        return new ResponseEntity<>(findById, HttpStatus.OK);
     }
 
-    @PostMapping ("/save")
-    public CreateProgrammingLanguageRequest save ( ProgrammingLanguage programmingLanguage){
-        return  programmingService.save(programmingLanguage);
+    @PostMapping("/save")
+    public ResponseEntity<CreateProgrammingLanguageRequest> save(ProgrammingLanguage programmingLanguage) throws Exception {
+
+        CreateProgrammingLanguageRequest save = programmingService.save(programmingLanguage);
+        return new ResponseEntity<>(save, HttpStatus.OK);
     }
 
-    @DeleteMapping ("/deleteById/{id}")
-    public CreateProgrammingLanguageRequest deleteById (@PathVariable("id") long id) {
-        return programmingService.deleteById(id);
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity<CreateProgrammingLanguageRequest> deleteById(@PathVariable("id") Long id) {
+
+        CreateProgrammingLanguageRequest deleteById = programmingService.deleteById(id);
+        return new ResponseEntity<>(deleteById, HttpStatus.OK);
     }
 }
