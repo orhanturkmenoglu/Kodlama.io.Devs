@@ -1,6 +1,5 @@
 package kodlama.io.Kodlama.io.Devs.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,13 +8,17 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/*
+    Serializable özetle :nesnemizin dış dünyada da bire bir aynı veri tipinde kullanılması
+    ve geri alınarak veri kaybı yaşanmadan okunmasını sağlar.
+ */
 @Entity
 @Table(name = "tecnologies")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Tecnology  {
+public class Tecnology implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

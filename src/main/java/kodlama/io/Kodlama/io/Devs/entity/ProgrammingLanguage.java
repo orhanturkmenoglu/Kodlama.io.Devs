@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 /*
  @JsonManagedReference : alt üst nesneleri belirmek ve api kullanımı sırasında jsondan dönen türün
@@ -23,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProgrammingLanguage {
+public class ProgrammingLanguage implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
