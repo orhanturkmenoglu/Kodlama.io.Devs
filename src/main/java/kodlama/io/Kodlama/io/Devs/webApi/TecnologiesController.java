@@ -2,6 +2,7 @@ package kodlama.io.Kodlama.io.Devs.webApi;
 
 import kodlama.io.Kodlama.io.Devs.business.TecnologyService;
 import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequest;
+import kodlama.io.Kodlama.io.Devs.business.request.CreateTecnologyRequest;
 import kodlama.io.Kodlama.io.Devs.business.response.GetAllTecnologyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class TecnologiesController {
     }
 
     @DeleteMapping ("/deleteById/{id}")
-    public CreateProgrammingLanguageRequest deleteById(@PathVariable("id") long id) {
+    public CreateTecnologyRequest deleteById(@PathVariable("id") long id) {
         return tecnologyService.deleteById(id);
     }
 }

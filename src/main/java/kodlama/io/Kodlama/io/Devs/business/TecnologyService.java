@@ -1,6 +1,7 @@
 package kodlama.io.Kodlama.io.Devs.business;
 
 import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequest;
+import kodlama.io.Kodlama.io.Devs.business.request.CreateTecnologyRequest;
 import kodlama.io.Kodlama.io.Devs.business.response.GetAllTecnologyResponse;
 import kodlama.io.Kodlama.io.Devs.entity.Tecnology;
 import kodlama.io.Kodlama.io.Devs.repositories.TecnologyRepository;
@@ -36,11 +37,11 @@ public class TecnologyService {
         return responseItem;
     }
 
-    public CreateProgrammingLanguageRequest deleteById(long id) {
+    public CreateTecnologyRequest deleteById(long id) {
 
-        CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest();
-        request.setId(id);
-        repository.deleteById(request.getId());
+        CreateTecnologyRequest request = new CreateTecnologyRequest();
+        request.setTecnologyId(id);
+        repository.deleteById(request.getTecnologyId());
 
         return request;
     }

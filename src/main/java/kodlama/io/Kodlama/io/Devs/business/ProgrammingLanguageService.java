@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProgrammingService {
+public class ProgrammingLanguageService {
     private ProgrammingLanguageRepository repository;
 
     @Autowired
-    public ProgrammingService(ProgrammingLanguageRepository repository) {
+    public ProgrammingLanguageService(ProgrammingLanguageRepository repository) {
         this.repository = repository;
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
  @JsonManagedReference : parent nesneyi işaret eder
  @JsonBackReference     : child nesneyi işaret eder
 
- alternatif olarak dto design pattern da kullanılabilir.
+ alternatif olarak dto design pattern ile birlikte object mapper da kullanılabilir.
  */
 @Entity
 @Table(name = "programmingLanguages")
@@ -24,14 +24,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProgrammingLanguage implements Serializable {
+public class ProgrammingLanguage  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String language;
 
-   /* @JsonManagedReference*/
+   @JsonManagedReference
     @OneToMany (fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "programmingLanguage")
     private List<Tecnology> tecnologies ;
 }
