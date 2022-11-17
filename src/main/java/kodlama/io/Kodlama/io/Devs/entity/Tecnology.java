@@ -9,8 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /*
-    Serializable özetle :nesnemizin dış dünyada da bire bir aynı veri tipinde kullanılması
-    ve geri alınarak veri kaybı yaşanmadan okunmasını sağlar.
+    Serializable özetle : nesnenin dış dünyada da karşılıgının olması (aynı bire bir veri tipleriyle).
  */
 @Entity
 @Table(name = "tecnologies")
