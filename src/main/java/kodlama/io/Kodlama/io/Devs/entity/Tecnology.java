@@ -20,7 +20,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Tecnology{
+public class Tecnology implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

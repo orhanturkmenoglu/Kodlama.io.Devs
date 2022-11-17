@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProgrammingLanguage  {
+public class ProgrammingLanguage  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
