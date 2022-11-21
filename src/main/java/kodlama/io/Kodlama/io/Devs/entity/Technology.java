@@ -31,6 +31,6 @@ public class Technology implements Serializable{
     private Long technologyId;
 
     private String technologyName;
-    private Long programingLanguageId;
+    private Long programmingLanguageId;
 }
 

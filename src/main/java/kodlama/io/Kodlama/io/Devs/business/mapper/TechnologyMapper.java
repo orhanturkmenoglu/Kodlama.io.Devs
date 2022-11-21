@@ -38,4 +38,8 @@ public class TechnologyMapper {
                 .map(this::mapToTechnology)
                 .collect(Collectors.toList());
     }
+
+
+
+
 }

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -12,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class CreateProgrammingLanguageRequest {
+    @NotEmpty(message = "language type shouldn't be NULL OR EMPTY")
     private String language;
+    @NotEmpty(message = "technologyRequestList type shouldn't be NULL OR EMPTY")
     private List<CreateTechnologyRequest> technologyRequestList;
 }

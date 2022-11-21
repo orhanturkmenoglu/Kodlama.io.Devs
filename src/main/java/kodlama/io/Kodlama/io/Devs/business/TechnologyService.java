@@ -26,9 +26,9 @@ public class TechnologyService {
 
     public  List<TechnologyDto> createTechnology (List<CreateTechnologyRequest> request,Long programmingLanguageId){
         List<Technology> technologyList = technologyMapper.mapToTechnologyList(request);
-        technologyList.forEach(technology -> technology.setProgramingLanguageId(programmingLanguageId));
-        List<Technology> savedtechnologyList = technologyRepository.saveAll(technologyList);
-        return technologyMapper.mapToTechnologyDtoList(savedtechnologyList);
+        technologyList.forEach(technology -> technology.setProgrammingLanguageId(programmingLanguageId));
+        List<Technology> savedTechnologyList = technologyRepository.saveAll(technologyList);
+        return technologyMapper.mapToTechnologyDtoList(savedTechnologyList);
     }
 
     public List<TechnologyDto> getAllTechnologies(String name) {

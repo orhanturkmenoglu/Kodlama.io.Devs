@@ -24,6 +24,13 @@ public class ProgrammingLanguageService {
 
     private final TechnologyMapper technologyMapper;
 
+    @Transactional
+    public ProgrammingLanguageDto createProgrammingLanguage(CreateProgrammingLanguageRequest request) {
+        ProgrammingLanguage programmingLanguage = programmingLanguageMapper.mapToProgrammingLanguage(request);
+        ProgrammingLanguage savedProgrammingLanguage = programmingLanguageRepository.save(programmingLanguage);
+        List<TechnologyDto> technologyList = technologyService.createTechnology(request.getTechnologyRequestList(), savedProgrammingLanguage.getId());
+        return programmingLanguageMapper.mapToProgrammingLanguageDto(savedProgrammingLanguage, technologyList);
+    }
     public List<ProgrammingLanguageDto> getAllProgrammingLanguages(String name) {
         if (name != null && name.length() > 0) {
             List<ProgrammingLanguage> programmingLanguageList = programmingLanguageRepository.findBylanguage(name);
@@ -33,15 +40,6 @@ public class ProgrammingLanguageService {
         List<ProgrammingLanguage> programmingLanguageList = programmingLanguageRepository.findAll();
         return programmingLanguageMapper.mapToProgrammingLanguageDto(programmingLanguageList);
     }
-
-    @Transactional
-    public ProgrammingLanguageDto createProgrammingLanguage(CreateProgrammingLanguageRequest request) throws Exception {
-        ProgrammingLanguage programmingLanguage = programmingLanguageMapper.mapToProgrammingLanguage(request);
-        ProgrammingLanguage savedProgrammingLanguage = programmingLanguageRepository.save(programmingLanguage);
-        List<TechnologyDto> technologyList = technologyService.createTechnology(request.getTechnologyRequestList(), savedProgrammingLanguage.getId());
-        return programmingLanguageMapper.mapToProgrammingLanguageDto(savedProgrammingLanguage,technologyList);
-    }
-
     public ProgrammingLanguageDto findById(long id) {
         Optional<ProgrammingLanguage> findById = programmingLanguageRepository.findById(id);
         ProgrammingLanguageDto response = new ProgrammingLanguageDto();

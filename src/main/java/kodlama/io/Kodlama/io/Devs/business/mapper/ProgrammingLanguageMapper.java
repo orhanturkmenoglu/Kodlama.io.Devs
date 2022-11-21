@@ -4,6 +4,7 @@ import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequ
 import kodlama.io.Kodlama.io.Devs.business.response.ProgrammingLanguageDto;
 import kodlama.io.Kodlama.io.Devs.business.response.TechnologyDto;
 import kodlama.io.Kodlama.io.Devs.entity.ProgrammingLanguage;
+import kodlama.io.Kodlama.io.Devs.entity.Technology;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,7 @@ public class ProgrammingLanguageMapper {
                 .language(request.getLanguage())
                 .build();
     }
+
 
     public ProgrammingLanguageDto mapToProgrammingLanguageDto (ProgrammingLanguage programmingLanguage, List<TechnologyDto> technologyList){
         return ProgrammingLanguageDto.builder()

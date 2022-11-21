@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class ProgrammingLanguageController {
     private final ProgrammingLanguageService programmingService;
 
     @PostMapping
-    public ResponseEntity<ProgrammingLanguageDto> createProgrammingLanguage(@RequestBody CreateProgrammingLanguageRequest request) throws Exception {
+    public ResponseEntity<ProgrammingLanguageDto> createProgrammingLanguage(@Valid @RequestBody CreateProgrammingLanguageRequest request)  {
         ProgrammingLanguageDto programmingLanguageDto = programmingService.createProgrammingLanguage(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(programmingLanguageDto);
     }
