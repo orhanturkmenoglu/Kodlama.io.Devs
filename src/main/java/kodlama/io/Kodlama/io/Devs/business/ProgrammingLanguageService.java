@@ -1,79 +1,59 @@
 package kodlama.io.Kodlama.io.Devs.business;
 
+import kodlama.io.Kodlama.io.Devs.business.mapper.ProgrammingLanguageMapper;
+import kodlama.io.Kodlama.io.Devs.business.mapper.TechnologyMapper;
 import kodlama.io.Kodlama.io.Devs.business.request.CreateProgrammingLanguageRequest;
-import kodlama.io.Kodlama.io.Devs.business.response.GetAllProgrammingLanguageResponse;
+import kodlama.io.Kodlama.io.Devs.business.response.ProgrammingLanguageDto;
+import kodlama.io.Kodlama.io.Devs.business.response.TechnologyDto;
 import kodlama.io.Kodlama.io.Devs.entity.ProgrammingLanguage;
 import kodlama.io.Kodlama.io.Devs.repositories.ProgrammingLanguageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProgrammingLanguageService {
-    private ProgrammingLanguageRepository repository;
 
-    @Autowired
-    public ProgrammingLanguageService(ProgrammingLanguageRepository repository) {
-        this.repository = repository;
-    }
+    private final TechnologyService technologyService;
+    private final ProgrammingLanguageRepository programmingLanguageRepository;
+    private final ProgrammingLanguageMapper programmingLanguageMapper;
 
-    public List<GetAllProgrammingLanguageResponse> findAll() {
+    private final TechnologyMapper technologyMapper;
 
-        List<ProgrammingLanguage> findAll = repository.findAll();
-
-        List<GetAllProgrammingLanguageResponse> responseItem = new ArrayList<>();
-
-        for (ProgrammingLanguage language : findAll) {
-            GetAllProgrammingLanguageResponse response = new GetAllProgrammingLanguageResponse();
-            response.setId(language.getId());
-            response.setLanguage(language.getLanguage());
-            response.setTecnologies(language.getTechnologies());
-            responseItem.add(response);
+    public List<ProgrammingLanguageDto> getAllProgrammingLanguages(String name) {
+        if (name != null && name.length() > 0) {
+            List<ProgrammingLanguage> programmingLanguageList = programmingLanguageRepository.findBylanguage(name);
+            return programmingLanguageMapper.mapToProgrammingLanguageDto(programmingLanguageList);
         }
 
-        return responseItem;
+        List<ProgrammingLanguage> programmingLanguageList = programmingLanguageRepository.findAll();
+        return programmingLanguageMapper.mapToProgrammingLanguageDto(programmingLanguageList);
     }
 
-    public CreateProgrammingLanguageRequest save(ProgrammingLanguage programmingLanguage) throws Exception {
-
-        if (programmingLanguage.getLanguage().isEmpty() || programmingLanguage.getLanguage() == null) {
-            throw new Exception("Programlama dili boş veya null geçilemez !!");
-        }
-
-        if (programmingLanguage.equals(programmingLanguage)) {
-            throw new Exception("Programala dili tekrar edemez !!");
-        }
-
-        ProgrammingLanguage save = repository.save(programmingLanguage);
-
-        CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest();
-        request.setLanguage(save.getLanguage());
-
-        return request;
+    @Transactional
+    public ProgrammingLanguageDto createProgrammingLanguage(CreateProgrammingLanguageRequest request) throws Exception {
+        ProgrammingLanguage programmingLanguage = programmingLanguageMapper.mapToProgrammingLanguage(request);
+        ProgrammingLanguage savedProgrammingLanguage = programmingLanguageRepository.save(programmingLanguage);
+        List<TechnologyDto> technologyList = technologyService.createTechnology(request.getTechnologyRequestList(), savedProgrammingLanguage.getId());
+        return programmingLanguageMapper.mapToProgrammingLanguageDto(savedProgrammingLanguage,technologyList);
     }
 
-    public GetAllProgrammingLanguageResponse findById(long id) {
-
-        Optional<ProgrammingLanguage> findById = repository.findById(id);
-        GetAllProgrammingLanguageResponse response = new GetAllProgrammingLanguageResponse();
+    public ProgrammingLanguageDto findById(long id) {
+        Optional<ProgrammingLanguage> findById = programmingLanguageRepository.findById(id);
+        ProgrammingLanguageDto response = new ProgrammingLanguageDto();
         if (findById.isPresent()) {
-            response.setId(findById.get().getId());
-            response.setLanguage(findById.get().getLanguage());
+            programmingLanguageMapper.mapToProgrammingLanguageDto(findById.get());
         }
 
         return response;
     }
 
-    public CreateProgrammingLanguageRequest deleteById(Long id) {
-
-        CreateProgrammingLanguageRequest request = new CreateProgrammingLanguageRequest();
-        request.setId(id);
-        repository.deleteById(request.getId());
-
-        return request;
+    public void deleteProgrammingLanguageById(Long id) {
+        return;
     }
 
 }

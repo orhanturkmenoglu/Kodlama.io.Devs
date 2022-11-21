@@ -23,14 +23,19 @@ public class TechnologyMapper {
         }
 
         return TechnologyDto.builder()
-                .technologyId(technology.getTecnologyId())
-                .technologyName(technology.getTecnologyName())
+                .technologyId(technology.getTechnologyId())
+                .technologyName(technology.getTechnologyName())
                 .build();
     }
 
     public Technology mapToTechnology(CreateTechnologyRequest request) {
         return Technology.builder()
-                .tecnologyName(request.getTecnologyName())
+                .technologyName(request.getTechnologyName())
                 .build();
+    }
+    public List<Technology> mapToTechnologyList(List<CreateTechnologyRequest> request) {
+        return request.stream()
+                .map(this::mapToTechnology)
+                .collect(Collectors.toList());
     }
 }

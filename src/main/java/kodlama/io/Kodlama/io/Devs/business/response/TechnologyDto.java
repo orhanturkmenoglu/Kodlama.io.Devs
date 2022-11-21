@@ -12,7 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class TechnologyDto  implements Serializable {
-
     private Long technologyId;
     private String technologyName;
 }

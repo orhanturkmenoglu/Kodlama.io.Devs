@@ -16,48 +16,41 @@ import java.util.Optional;
 public class TechnologyService {
 
     private final TechnologyMapper technologyMapper;
-    private final TechnologyRepository repository;
+    private final TechnologyRepository technologyRepository;
 
     public  TechnologyDto createTechnology (CreateTechnologyRequest request){
         Technology technology = technologyMapper.mapToTechnology(request);
-        Technology createdTechnology = repository.save(technology);
+        Technology createdTechnology = technologyRepository.save(technology);
         return technologyMapper.mapToTechnologyDto(createdTechnology);
+    }
+
+    public  List<TechnologyDto> createTechnology (List<CreateTechnologyRequest> request,Long programmingLanguageId){
+        List<Technology> technologyList = technologyMapper.mapToTechnologyList(request);
+        technologyList.forEach(technology -> technology.setProgramingLanguageId(programmingLanguageId));
+        List<Technology> savedtechnologyList = technologyRepository.saveAll(technologyList);
+        return technologyMapper.mapToTechnologyDtoList(savedtechnologyList);
     }
 
     public List<TechnologyDto> getAllTechnologies(String name) {
         if (name != null && name.trim().length() > 0) {
-            List<Technology> technologyList = repository.findByTechnologyName(name);
+            List<Technology> technologyList = technologyRepository.findByTechnologyName(name);
             return  technologyMapper.mapToTechnologyDtoList(technologyList);
         }
 
-        List<Technology> technologyList = repository.findAll();
-      /*  List<TechnologyDto> technologyDtoList = new ArrayList<>();
-
-        technologyList.forEach(technology -> technologyDtoList.add(TechnologyDto.builder()
-                .technologyId(technology.getTecnologyId())
-                .technologyName(technology.getTecnologyName())
-                .build()));
-
-        technologyList.stream()
-                .map(technology -> TechnologyDto.builder()
-                        .technologyId(technology.getTecnologyId())
-                        .technologyName(technology.getTecnologyName())
-                        .build())
-                .collect(Collectors.toList());
-*/
+        List<Technology> technologyList = technologyRepository.findAll();
         return technologyMapper.mapToTechnologyDtoList(technologyList);
     }
 
     public TechnologyDto getTechnologyById(Long id) {
-        Optional<Technology> technology = repository.findById(id);
+        Optional<Technology> technology = technologyRepository.findById(id);
         technology.orElseThrow(() -> new IllegalArgumentException("Technology not found for id: " + id));
         return technologyMapper.mapToTechnologyDto(technology.get());
     }
 
     public void deleteTechnologyById(Long id) {
-        Optional<Technology> technology = repository.findById(id);
+        Optional<Technology> technology = technologyRepository.findById(id);
         technology.orElseThrow(() -> new IllegalArgumentException("Technology not found for id: " + id));
-        repository.deleteById(id);
+        technologyRepository.deleteById(id);
     }
 
 }

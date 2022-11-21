@@ -1,7 +1,6 @@
 package kodlama.io.Kodlama.io.Devs.business.response;
 
 
-import kodlama.io.Kodlama.io.Devs.entity.Technology;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,9 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetAllProgrammingLanguageResponse {
+public class ProgrammingLanguageDto {
     private Long id;
     private String language;
-
-    private List<Technology> tecnologies;
+    private List<TechnologyDto> technologies;
 }

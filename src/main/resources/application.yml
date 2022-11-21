@@ -1,0 +1,14 @@
+server:
+  port: 8051
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/TestDB
+    username: postgres
+    password: 12345
+  jpa:
+    show-sql: true
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+      

@@ -1,7 +1,9 @@
 package kodlama.io.Kodlama.io.Devs.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,21 +13,24 @@ import java.io.Serializable;
      Bu mekanizma ile daha sonra, nesneyi depolanan yerden çekip, aynı durum (state) ve özellikleri ile
      kullanmaya devam edebiliriz. Tüm bu sisteme, Object Serialization (Nesne Serileştirme) adı verilir.
  */
+
+/*
+    @ToString(exclude ="programmingLanguage") : programmingLanguage özelliği dize gösteriminde
+    hariç tutuldu.
+ */
 @Entity
 @Table(name = "technologies")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude ="programmingLanguage")
 public class Technology implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tecnologyId;
-    private String tecnologyName;
+    private Long technologyId;
 
-   /* @JsonBackReference*/
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ProgrammingLanguage programmingLanguage;
+    private String technologyName;
+    private Long programingLanguageId;
 }
+
