@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Builder
 public class CreateTechnologyRequest {
-
     @NotBlank (message = "technologyName type shouldn't be NULL OR EMPTY")
     private String technologyName;
 }
