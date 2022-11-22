@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProgrammingLanguageDto {
+public class ProgrammingLanguageDto  {
     private Long id;
     private String language;
     private List<TechnologyDto> technologies;

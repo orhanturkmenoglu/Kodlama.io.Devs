@@ -18,7 +18,7 @@ public class ProgrammingLanguageController {
     private final ProgrammingLanguageService programmingService;
 
     @PostMapping
-    public ResponseEntity<ProgrammingLanguageDto> createProgrammingLanguage(@Valid @RequestBody CreateProgrammingLanguageRequest request)  {
+    public ResponseEntity<ProgrammingLanguageDto> createProgrammingLanguage(@Valid @RequestBody CreateProgrammingLanguageRequest request){
         ProgrammingLanguageDto programmingLanguageDto = programmingService.createProgrammingLanguage(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(programmingLanguageDto);
     }

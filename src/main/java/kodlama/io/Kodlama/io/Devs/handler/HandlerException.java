@@ -24,7 +24,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
         objectBody.put("Current TimeStamp",new Date());
         objectBody.put("Status",status.value());
 
-        // GetAll Errors
+        // GetAll Error message
 
         List<String> exceptionalErrors = ex.getBindingResult()
                 .getFieldErrors()
